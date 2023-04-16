@@ -1,0 +1,200 @@
+@media (max-width: 600px) {
+  html {
+    height: -webkit-fill-available;
+  }
+
+  body {
+    margin: 3em;
+    height: -webkit-fill-available;
+  }
+
+  h1 {
+    font-size: 2em;
+    padding-top: 0;
+    text-align: center;
+    margin: 2em -1em 1em -1em;
+  }
+
+  /* AGE VERIFICATION */
+  .age-verification {
+    top: 100%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: fixed;
+    font-size: 1em;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    transform: translate(-50%, -100%);
+  }
+
+  .age-verification .buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .age-verification .question {
+    margin: 1em;
+    text-align: center;
+  }
+
+  #button-18plus,
+  #button-minor {
+    width: 80%;
+  }
+
+  /* NAVIGATION */
+  .header {
+    bottom: 0;
+    height: 6em;
+    top: initial;
+    padding-bottom: 1vh;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .header--hidden {
+    transform: translateY(100%);
+  }
+
+  .navigation-contents {
+    display: none;
+  }
+
+  .mobile-navigation-contents {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .mobile-navigation-contents img {
+    width: 2em;
+    height: 2em;
+  }
+
+  #home {
+    width: 4em;
+    height: 4em;
+  }
+
+  /* WRAPPER */
+  .wrapper {
+    margin: 114px auto;
+    margin-bottom: 0;
+  }
+
+  /* PRODUCT SHOWCASE */
+  .selector .menu {
+    flex-direction: row;
+  }
+
+  .selector .menu .row {
+    flex-direction: column;
+  }
+
+  /* SHARE QBOX */
+  .share-qbox-contents {
+    margin-top: -1em;
+  }
+
+  .qr-code img {
+    width: 14em;
+  }
+
+  .click-on-me {
+    font-size: 2em;
+  }
+
+  /* WHY QBOX */
+  .marketing101 {
+    width: 90%;
+    font-size: 1.2em;
+    margin-bottom: 2em;
+  }
+
+  .slides-container {
+    width: 100%;
+    height: 100em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .left-element,
+  .right-element {
+    z-index: 40;
+    flex-basis: 50%;
+  }
+
+  .middle-element {
+    width: 0;
+    flex-basis: 0;
+  }
+
+  .middle-element img {
+    top: 15%;
+    width: 12em;
+  }
+
+  .first-word {
+    font-size: 2em;
+    font-weight: 600;
+  }
+
+  .rest {
+    font-size: 1em;
+    font-weight: 400;
+  }
+
+  /* FAQ */
+  .faq-block {
+    width: 80%;
+  }
+
+  .faq-block:hover {
+    padding: 1em 2em 1em 2em;
+  }
+
+  .faq-block-content {
+    font-weight: 400;
+  }
+
+  .contact-us-link {
+    font-size: 1em;
+    background-color: var(--sat-white);
+  }
+
+  /* CONTACT US */
+  .CONTACT-US {
+    display: initial;
+  }
+
+  .contact-box {
+    gap: 1em;
+    padding: 1em;
+    flex-direction: column;
+  }
+
+  .info-placeholder {
+    gap: 0.5em;
+    margin-left: 0;
+  }
+
+  /* FOOTER */
+  .FOOTER {
+    gap: 2em;
+    margin-top: 7em;
+    align-items: center;
+    padding-bottom: 10em;
+  }
+
+  .FOOTER .company-info {
+    text-align: left;
+    align-items: start;
+  }
+}
