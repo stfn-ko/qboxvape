@@ -4,8 +4,10 @@
   const ageVerificationCookie = getCookie('ageVerification');
 
   const header = query('.header');
+  const qrCodeElement = query('.qr-code');
   const buttons = queryAll('.menu .circle'); 
   const buttonMinor = query(`#button-minor`);
+  const clickOnMeText = query('.click-on-me');
   const button18plus = query(`#button-18plus`);
   const middleElement = query('.middle-element');
   const slidesContainer = query('.slides-container');
@@ -88,6 +90,51 @@
     prevScrollPos = currentScrollPos;
   }
 
+
+   // share handling
+  async function share() {
+    const response = await fetch('./manifest.json');
+    const data = await response.json();
+    const { url, text, title, taskTextInitial, taskTextComplete } = data.share_info;
+    
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
+    try {
+      if (isMobile && navigator.share) {
+        // Use navigator.share for mobile devices
+        await navigator.share({
+          title: title,
+          text: text,
+          url: url,
+        });
+        console.log('Successful share');
+      } else {
+        // Use Clipboard API for desktop devices
+        await navigator.clipboard.writeText(url);
+        console.log('Successful copy');
+      }
+      
+      clickOnMeText.textContent = taskTextComplete;
+      
+    } catch (error) {
+      console.log('Error:', error);
+      
+      if (isMobile) {
+        // Fallback behavior for mobile devices
+        window.location.href = `sms:&body=${encodeURIComponent(url)}`;
+      } else {
+        // Fallback behavior for desktop devices
+        clickOnMeText.textContent = "scan this QR!";
+      }
+    }
+  
+    // Reset the button text after a delay
+    setTimeout(() => {
+      clickOnMeText.textContent = taskTextInitial;
+    }, 1000);
+  }
+
+
   // age verification
   if (ageVerificationCookie === 'true') ageVerification.remove(); 
   else setTimeout(() => { 
@@ -169,40 +216,8 @@
   
   
   // event listeners 
+  qrCodeElement.addEventListener('click', share)
   button18plus.addEventListener('click', handle18plusButton);
   buttonMinor.addEventListener('click', handleMinorButton);
   window.addEventListener('scroll', handleMobileNavigation);
   document.addEventListener('DOMContentLoaded', selectTarget);
-
-
-  const qrCodeElement = query('.qr-code');
-  const clickOnMeElement = query('.click-on-me');
-
-  async function share() {
-    const response = await fetch('./manifest.json');
-    const data = await response.json();
-    
-    const { url, text, title, taskTextInitial, taskTextComplete } = data.share_info;
-    
-    try {
-      if (navigator.canShare)
-      await navigator.share({
-        title: title,
-        text: text,
-        url: url,
-      });
-      else
-      
-      clickOnMeElement.textContent = taskTextComplete;
-      console.log('Successful share');
-    
-    } catch (error) {
-      console.log('Error sharing:', error);
-    }
-
-    setTimeout(() => {
-      clickOnMeElement.textContent = taskTextInitial;
-    }, 1000);
-  }
-
-  qrCodeElement.addEventListener('click', share)
