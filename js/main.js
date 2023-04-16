@@ -4,6 +4,7 @@
   const ageVerificationCookie = getCookie('ageVerification');
 
   const header = query('.header');
+  const qrImg = query('.qr-code img');
   const qrCodeElement = query('.qr-code');
   const buttons = queryAll('.menu .circle'); 
   const buttonMinor = query(`#button-minor`);
@@ -95,6 +96,8 @@
   async function share() {
     const response = await fetch('./manifest.json');
     const data = await response.json();
+    const qrLogo = 'public/qr/QR_transparent.png';
+    const qrDone = 'public/qr/QR_transparent_done.png';
     const { url, text, title, taskTextInitial, taskTextComplete } = data.share_info;
     
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -115,6 +118,7 @@
       }
       
       clickOnMeText.textContent = taskTextComplete;
+      qrImg.src = qrDone;
       
     } catch (error) {
       console.log('Error:', error);
@@ -131,7 +135,8 @@
     // Reset the button text after a delay
     setTimeout(() => {
       clickOnMeText.textContent = taskTextInitial;
-    }, 1000);
+      qrImg.src = qrLogo;
+    }, 1500);
   }
 
 
