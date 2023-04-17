@@ -461,7 +461,7 @@ img {
 }
 
 .middle-element img {
-  top: 25em;
+  top: 20vh;
   left: 50%;
   width: 16em;
   position: sticky;
