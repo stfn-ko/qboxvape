@@ -259,8 +259,8 @@ img {
 
 .product-description {
   gap: 1em;
-  min-width: 22em;
   display: flex;
+  min-width: 24.5em;
   flex-direction: column;
   justify-content: flex-end;
 }
