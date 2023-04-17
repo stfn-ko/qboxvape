@@ -93,16 +93,15 @@
 
 
    // share handling
-   async function share() {
+  async function share() {
     const response = await fetch('./manifest.json');
+    const data = await response.json();
     const qrLogo = 'public/qr/QR_transparent.png';
     const qrDone = 'public/qr/QR_transparent_done.png';
-    const data = await response.json();
-    const { url, text, title, taskTextInitial, taskTextComplete, taskTextFallbackComplete } = data.share_info;
-      
-    const uaData = navigator.userAgentData || (navigator.userAgentData && navigator.userAgentData.brands && navigator.userAgentData.brands.length && navigator.userAgentData.brands.find(({ brand }) => brand === 'Chromium'));
-    const isMobile = uaData && uaData.mobile;
+    const { url, text, title, taskTextInitial, taskTextComplete } = data.share_info;
     
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  
     try {
       if (isMobile && navigator.share) {
         // Use navigator.share for mobile devices
@@ -111,31 +110,35 @@
           text: text,
           url: url,
         });
+        console.log('Successful share');
       } else {
         // Use Clipboard API for desktop devices
         await navigator.clipboard.writeText(url);
+        console.log('Successful copy');
       }
-        
-      qrImg.src = qrDone;
+      
       clickOnMeText.textContent = taskTextComplete;
+      qrImg.src = qrDone;
+      
     } catch (error) {
       console.log('Error:', error);
-        
+      
       if (isMobile) {
         // Fallback behavior for mobile devices
         window.location.href = `sms:&body=${encodeURIComponent(url)}`;
       } else {
         // Fallback behavior for desktop devices
-        clickOnMeText.textContent = taskTextFallbackComplete;
+        clickOnMeText.textContent = "scan this QR!";
       }
     }
-      
+  
     // Reset the button text after a delay
     setTimeout(() => {
       clickOnMeText.textContent = taskTextInitial;
       qrImg.src = qrLogo;
     }, 1500);
   }
+
 
   // age verification
   if (ageVerificationCookie === 'true') ageVerification.remove(); 
