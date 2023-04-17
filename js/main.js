@@ -4,16 +4,21 @@
   const ageVerificationCookie = getCookie('ageVerification');
 
   const header = query('.header');
-  const qrImg = query('.qr-code img');
+  const qrImage = query('.qr-code img');
   const qrCodeElement = query('.qr-code');
+  const productName = query('.taste-name');
   const buttons = queryAll('.menu .circle'); 
   const buttonMinor = query(`#button-minor`);
+  const image = query(".middle-element img");
   const clickOnMeText = query('.click-on-me');
   const button18plus = query(`#button-18plus`);
-  const middleElement = query('.middle-element');
-  const slidesContainer = query('.slides-container');
+  const phrases = Array.from(queryAll(".phrase"));
+  const tastyLogoNew = query('.tasty-logo-new img');
   const ageVerification = query('.age-verification');
-  const randColorElements = queryAll('.faq-block, .contact-box, .phrase, .share-qbox-contents');
+  const productImageNew = query('.product-display-new img');
+  const tastyLogoPrevious = query('.tasty-logo-previous img');
+  const productImagePrevious = query('.product-display-previous img');
+  const randColorElements = queryAll('.faq-block, .contact-box, .share-qbox-contents');
   
   const timeoutAddModal = 500;
   const timeoutRemoveModal = 800;
@@ -68,7 +73,7 @@
       scrollToTarget(targetClass);
     });
   }
-
+  
   function scrollToTarget(targetClass) {
     const clickableElements = queryAll(`.navigate-to[data-target-class="${targetClass}"]`);
     
@@ -76,7 +81,6 @@
       clickable.addEventListener('click', () => {
         const target = query(`.${targetClass}`);
         if (target) target.scrollIntoView({ behavior: 'smooth' });
-        
       });
     });
   }
@@ -92,13 +96,13 @@
   }
 
 
-   // share handling
+  // share handling
   async function share() {
     const response = await fetch('./manifest.json');
-    const data = await response.json();
     const qrLogo = 'public/qr/QR_transparent.png';
     const qrDone = 'public/qr/QR_transparent_done.png';
-    const { url, text, title, taskTextInitial, taskTextComplete } = data.share_info;
+    const data = await response.json();
+    const { url, text, title, taskTextInitial, taskTextComplete, taskTextFallbackComplete } = data.share_info;
     
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   
@@ -110,15 +114,15 @@
           text: text,
           url: url,
         });
-        console.log('Successful share');
       } else {
         // Use Clipboard API for desktop devices
         await navigator.clipboard.writeText(url);
-        console.log('Successful copy');
       }
       
+
+      qrImage.src = qrDone;
       clickOnMeText.textContent = taskTextComplete;
-      qrImg.src = qrDone;
+
       
     } catch (error) {
       console.log('Error:', error);
@@ -128,14 +132,14 @@
         window.location.href = `sms:&body=${encodeURIComponent(url)}`;
       } else {
         // Fallback behavior for desktop devices
-        clickOnMeText.textContent = "scan this QR!";
+        clickOnMeText.textContent = taskTextFallbackComplete;
       }
     }
-  
+    
     // Reset the button text after a delay
     setTimeout(() => {
       clickOnMeText.textContent = taskTextInitial;
-      qrImg.src = qrLogo;
+      qrImage.src = qrLogo;
     }, 1500);
   }
 
@@ -165,13 +169,57 @@
     button.addEventListener('click', (event) => {
       // Remove the 'selected' class from all buttons in the menu
       buttons.forEach((button) => {
+        button.disabled = true;
         button.classList.remove('selected');
       });
       
       // Add the 'selected' class to the clicked button
       event.target.classList.add('selected');
+      
+      productName.style.opacity = 0;
+      
+      productImagePrevious.style.opacity = 0;
+      productImageNew.src = `./public/product/${event.target.id}.png`;
+
+      tastyLogoPrevious.style.opacity = 0;
+      tastyLogoNew.src = `./public/tasty_logos/${event.target.id}_logo.png`;
+      
+      setTimeout(() => {
+        productName.textContent = event.target.title;
+        productName.style.opacity = 1;
+        
+        productImagePrevious.style.opacity = 1;
+        productImagePrevious.src = `./public/product/${event.target.id}.png`;
+        
+        tastyLogoPrevious.style.opacity = 1;
+        tastyLogoPrevious.src = `./public/tasty_logos/${event.target.id}_logo.png`;
+        
+        buttons.forEach((button) => {
+          button.disabled = false;
+        });
+      }, 300);
     });
   });
+
+  //slider phrases' opacity handler
+    
+  function updateOpacity() {
+    const rect = image.getBoundingClientRect();
+    const top = rect.top;
+    const bottom = rect.bottom;
+  
+    phrases.forEach((phrase) => {
+      const phraseRect = phrase.getBoundingClientRect();
+      const phraseTop = phraseRect.top;
+      const phraseBottom = phraseRect.bottom;
+  
+      if (bottom > phraseTop && top < phraseBottom) {
+        phrase.style.opacity = 1;
+      } else {
+        phrase.style.opacity = 0;
+      }
+    });
+  }
   
 
   // faq blocks
@@ -221,8 +269,10 @@
   
   
   // event listeners 
-  qrCodeElement.addEventListener('click', share)
-  button18plus.addEventListener('click', handle18plusButton);
+  qrCodeElement.addEventListener('click', share);
   buttonMinor.addEventListener('click', handleMinorButton);
   window.addEventListener('scroll', handleMobileNavigation);
-  document.addEventListener('DOMContentLoaded', selectTarget);
+  button18plus.addEventListener('click', handle18plusButton);
+  document.addEventListener('DOMContentLoaded', selectTarget); 
+  window.addEventListener("scroll", updateOpacity);
+  
