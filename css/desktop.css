@@ -157,8 +157,8 @@ img {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
   transform: translate(-50%, -50%);
+  -webkit-backdrop-filter: blur(30px);
   background-color: var(--blur-bg-dark);
   transition: opacity 0.8s ease-in-out;
 }
@@ -210,6 +210,13 @@ img {
   position: absolute;
 }
 
+.PRODUCT-SHOWCASE {
+  left: 50%;
+  width: 80%;
+  position: relative;
+  transform: translateX(-50%);
+}
+
 .selector {
   display: flex;
 }
@@ -232,6 +239,79 @@ img {
   border-radius: 30px;
 
   transition: box-shadow 0.3s ease-in-out;
+}
+
+.nicotine-is-bad {
+  font-size: 3em;
+  font-family: "Oswald";
+}
+
+.product-name {
+  font-size: 9em;
+}
+
+.product {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.product-description {
+  gap: 1em;
+  min-width: 22em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.taste-name {
+  font-size: 2em;
+  transition: opacity 0.3s;
+}
+
+.tasty-branding {
+  height: 31em;
+  display: flex;
+  margin-bottom: -1em;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tasty-logo-container {
+  width: 16em;
+  height: 16em;
+}
+
+.tasty-logo-previous img {
+  z-index: 2;
+  position: absolute;
+  transition: opacity 0.3s ease-in-out;
+}
+.tasty-logo-new img {
+  z-index: 1;
+  position: absolute;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.product-display-container {
+  min-width: 12em;
+  height: 31em;
+  margin-right: 5em;
+}
+
+.product-display-previous img {
+  z-index: 2;
+  width: 16em;
+  position: absolute;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.product-display-new img {
+  z-index: 1;
+  width: 16em;
+  position: absolute;
+  transition: opacity 0.3s ease-in-out;
 }
 
 #BRI {
@@ -313,36 +393,66 @@ img {
 }
 
 .marketing101 {
+  gap: 1em;
   width: 80%;
+  display: flex;
   font-size: 1.5em;
-  margin-bottom: 8em;
+  margin-bottom: 2em;
   text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.emphasize {
+  padding: 2%;
+  font-weight: 600;
+  width: fit-content;
+  border-radius: 30px;
+  background: var(--PI);
+  text-transform: uppercase;
 }
 
 .slides-container {
-  /* width: 60%; */
-  height: 140em;
+  width: 100%;
+  height: 180em;
   display: flex;
   justify-content: center;
 }
 
 .left-element,
 .right-element {
-  height: 60%;
+  height: 100%;
   display: flex;
   flex-basis: 30%;
+  align-self: center;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .left-element {
+  align-items: end;
   text-align: end;
-  align-items: start;
-}
+} 
 
 .right-element {
-  align-items: end;
+  align-items: start;
   text-align: start;
+}
+
+.left-element > .phrase:nth-child(1) {
+  top: 20%;
+  position: relative;
+}
+.left-element > .phrase:nth-child(2) {
+  top: 60%;
+  position: relative;
+}
+.right-element > .phrase:nth-child(1) {
+  top: 40%;
+  position: relative;
+}
+.right-element > .phrase:nth-child(2) {
+  top: 80%;
+  position: relative;
 }
 
 .middle-element {
@@ -362,6 +472,7 @@ img {
 .phrase {
   display: flex;
   flex-direction: column;
+  transition: opacity 0.6s ease-in-out;
 }
 
 .first-word {
