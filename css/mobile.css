@@ -1,4 +1,4 @@
-@media (max-width: 600px) {
+@media (max-width: 1160px) {
   html {
     height: -webkit-fill-available;
   }
@@ -90,12 +90,84 @@
   }
 
   /* PRODUCT SHOWCASE */
+  .PRODUCT-SHOWCASE {
+    height: 36em;
+    top: -4em;
+    position: relative;
+  }
+  
+  .product {
+    position: relative;
+  }
+
+  .product-display-container {
+    min-width: 8em;
+    height: 23.5em;
+    margin-right: 5em;
+  }
+
+  .product-display-previous img, .product-display-new img {
+    width: 12em;
+  }
+
+  .product-name {
+    display: none;
+  }
+
   .selector .menu {
     flex-direction: row;
   }
-
+  
   .selector .menu .row {
     flex-direction: column;
+  }
+
+  .selector .menu .row .circle {
+    width: 5em;
+    height: 5em;
+  }
+
+  .tasty-branding {
+    position: absolute;
+  }
+
+  .tasty-logo-container {
+    width: 0;
+    right: 16em;
+    height: 36em;
+    position: relative;
+    bottom: 3em;
+    left: -11.5em;
+  }
+
+  .taste-name {
+    left: 50%;
+    top: 560px;
+    width: 90vw;
+    z-index: 100;
+    min-height: 1em;
+    font-weight: 600;
+    text-align: center;
+    position: absolute;
+    border-radius: 30px;
+    padding: 0.1em;
+    transform: translateX(-50%);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    background-color: var(--blur-bg-dark);
+  }
+  
+  .tasty-logo-previous img, .tasty-logo-new img {
+    width: 8em;
+  }
+
+  .nicotine-is-bad {
+   font-size: 1.5em;
+   padding-bottom: 2.5em;
+  }
+
+  .product-description {
+    min-width: 10em;
   }
 
   /* SHARE QBOX */
@@ -113,22 +185,42 @@
 
   /* WHY QBOX */
   .marketing101 {
-    width: 90%;
+    width: 100%;
     font-size: 1.2em;
     margin-bottom: 2em;
   }
 
+  .emphasize {
+    padding: 5%;
+  }
+
   .slides-container {
-    width: 100%;
-    height: 100em;
+    height: 140em;
     display: flex;
-    justify-content: space-between;
   }
 
   .left-element,
   .right-element {
     z-index: 40;
     flex-basis: 50%;
+    position: relative;
+  }
+
+  .left-element {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .right-element {    
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .phrase {
+    width: 150%;
+    /* padding: 1em 1em 1em 1em; */
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
   }
 
   .middle-element {
@@ -176,6 +268,7 @@
 
   .contact-box {
     gap: 1em;
+    width: 62vw;
     padding: 1em;
     flex-direction: column;
   }
