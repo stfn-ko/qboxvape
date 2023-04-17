@@ -12,29 +12,30 @@
   const image = query(".middle-element img");
   const clickOnMeText = query('.click-on-me');
   const button18plus = query(`#button-18plus`);
+  const sliderVape = query('.middle-element img');
   const phrases = Array.from(queryAll(".phrase"));
   const tastyLogoNew = query('.tasty-logo-new img');
   const ageVerification = query('.age-verification');
   const productImageNew = query('.product-display-new img');
   const tastyLogoPrevious = query('.tasty-logo-previous img');
   const productImagePrevious = query('.product-display-previous img');
-  const randColorElements = queryAll('.faq-block, .contact-box, .share-qbox-contents');
+  const randColorElements = queryAll('.faq-block, .contact-box, .emphasize, .share-qbox-contents');
   
   const timeoutAddModal = 500;
   const timeoutRemoveModal = 800;
   
   const usedColors = [];
   const colors = [  
-    '--BRI',
-    '--TM',
-    '--PC',
-    '--KPFG',
-    '--DA',
-    '--PI',
-    '--SRC',
-    '--WI',
-    '--BSR',
-    '--L99'];
+    'BRI',
+    'TM',
+    'PC',
+    'KPFG',
+    'DA',
+    'PI',
+    'SRC',
+    'WI',
+    'BSR',
+    'L99'];
 
   let prevScrollPos = window.pageYOffset;
 
@@ -264,9 +265,12 @@
       randomColor = colors[Math.floor(Math.random() * colors.length)];
     }
 
-    element.style.setProperty('--rand-color', `var(${randomColor})`);
+    element.style.setProperty('--rand-color', `var(--${randomColor})`);
   });
   
+  // random prdocut picture
+  const randProducImg = colors[Math.floor(Math.random() * colors.length) + 1];
+  sliderVape.src = `./public/product/${randProducImg}.png`;
   
   // event listeners 
   qrCodeElement.addEventListener('click', share);

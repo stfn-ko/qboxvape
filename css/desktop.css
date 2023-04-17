@@ -408,8 +408,8 @@ img {
   font-weight: 600;
   width: fit-content;
   border-radius: 30px;
-  background: var(--PI);
   text-transform: uppercase;
+  background: var(--rand-color);
 }
 
 .slides-container {
@@ -431,7 +431,7 @@ img {
 .left-element {
   align-items: end;
   text-align: end;
-} 
+}
 
 .right-element {
   align-items: start;
