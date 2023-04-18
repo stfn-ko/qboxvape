@@ -127,14 +127,8 @@
       
     } catch (error) {
       console.log('Error:', error);
-      
-      if (isMobile) {
-        // Fallback behavior for mobile devices
-        window.location.href = `sms:&body=${encodeURIComponent(url)}`;
-      } else {
-        // Fallback behavior for desktop devices
-        clickOnMeText.textContent = taskTextFallbackComplete;
-      }
+      clickOnMeText.textContent = taskTextFallbackComplete;
+      if (isMobile) window.location.href = `sms:&body=${encodeURIComponent(url)}`;
     }
     
     // Reset the button text after a delay
