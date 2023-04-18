@@ -117,14 +117,18 @@
         });
       } else {
         // Use Clipboard API for desktop devices
-        try {await navigator.clipboard.writeText(url);}
-        catch (error) {
+        if(typeof ClipboardItem && navigator.clipboard.write) {
           const text = new ClipboardItem({
-            "text/plain": fetch(url)
-              .then(response => response.text())
-              .then(text => new Blob([text], { type: "text/plain" }))
+          "text/plain": fetch(someUrl)
+            .then(response => response.text())
+            .then(text => new Blob([text], { type: "text/plain" }))
           })
           navigator.clipboard.write([text])
+        }
+        else {
+          fetch(someUrl)
+          .then(response => response.text())
+          .then(text => navigator.clipboard.writeText(text))
         }
       }
       
