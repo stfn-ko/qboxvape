@@ -117,7 +117,14 @@
         });
       } else {
         // Use Clipboard API for desktop devices
+        if (navigator.clipboard)
         await navigator.clipboard.writeText(url);
+        else 
+        await navigator.share({
+          title: title,
+          text: text,
+          url: url,
+        });
       }
       
 
