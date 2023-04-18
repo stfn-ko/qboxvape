@@ -115,13 +115,17 @@
           text: text,
           url: url,
         });
-      } else {        
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            // Set the key beforehand and write a promise as the value.
-            'text/plain': fetch(url).then(response => response.blob()),
+      } else {
+        // Use Clipboard API for desktop devices
+        try {await navigator.clipboard.writeText(url);}
+        catch (error) {
+          const text = new ClipboardItem({
+            "text/plain": fetch(url)
+              .then(response => response.text())
+              .then(text => new Blob([text], { type: "text/plain" }))
           })
-        ]);
+          navigator.clipboard.write([text])
+        }
       }
       
 
