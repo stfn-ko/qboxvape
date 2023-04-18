@@ -117,13 +117,7 @@
         });
       } else {
         // Use Clipboard API for desktop devices
-
-          await navigator.share({
-            title: title,
-            text: text,
-            url: url,
-          });
-        
+        await navigator.clipboard.writeText(url);
       }
       
 
