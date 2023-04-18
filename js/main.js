@@ -116,8 +116,13 @@
           url: url,
         });
       } else {
-        // Use Clipboard API for desktop devices
-        await navigator.clipboard.writeText(url);
+        const makeTextPromise = async () => {
+          return new ClipboardItem({ "text/plain": new Blob([url], { type: "text/plain" }) });
+        }
+        
+        navigator.clipboard.write([await makeTextPromise()])
+          .then(function () { console.log('copied'); })
+          .catch(function (error) { console.log(error); });
       }
       
 
