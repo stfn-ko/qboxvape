@@ -115,14 +115,13 @@
           text: text,
           url: url,
         });
-      } else {
-        const makeTextPromise = async () => {
-          return new ClipboardItem({ "text/plain": new Blob([url], { type: "text/plain" }) });
-        }
-        
-        navigator.clipboard.write([await makeTextPromise()])
-          .then(function () { console.log('copied'); })
-          .catch(function (error) { console.log(error); });
+      } else {        
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            // Set the key beforehand and write a promise as the value.
+            'text/plain': fetch(url).then(response => response.blob()),
+          })
+        ]);
       }
       
 
