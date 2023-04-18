@@ -1,9 +1,10 @@
 {
-    "share_info": {
-      "url": "https://qboxvape.com",
-      "text": "Share QBOX with friends",
-      "title": "Share",
-      "taskTextInitial": "click me",
-      "taskTextComplete": "link copied"
-    }
+  "share_info": {
+    "url": "https://qboxvape.com",
+    "text": "Share QBOX with friends",
+    "title": "Share",
+    "taskTextInitial": "click me",
+    "taskTextComplete": "link copied",
+    "taskTextFallbackComplete": "scan this QR!"
+  }
 }

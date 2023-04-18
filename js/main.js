@@ -196,8 +196,8 @@
     });
   });
 
+
   //slider phrases' opacity handler
-    
   function updateOpacity() {
     const rect = image.getBoundingClientRect();
     const top = rect.top;
@@ -244,25 +244,24 @@
   });
 
 
-  // random colors
+  // randomize colors
   randColorElements.forEach((element, index) => {
     let randomColor;
     
     // Assign unique color to the first colors.length faq-blocks
     if (index < colors.length) {
-      do {
-        randomColor = colors[Math.floor(Math.random() * colors.length)];
-      } while (usedColors.includes(randomColor));
-      
+      do randomColor = colors[Math.floor(Math.random() * colors.length)];
+      while (usedColors.includes(randomColor));
       usedColors.push(randomColor);
-    } else {
-      randomColor = colors[Math.floor(Math.random() * colors.length)];
-    }
+    } 
+    
+    else randomColor = colors[Math.floor(Math.random() * colors.length)];
 
     element.style.setProperty('--rand-color', `var(--${randomColor})`);
   });
   
-  // random prdocut picture
+
+  // randomize prdocut picture
   const randProducImg = colors[Math.floor(Math.random() * colors.length) + 1];
   sliderVape.src = `./public/product/${randProducImg}.png`;
   
