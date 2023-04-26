@@ -260,7 +260,7 @@ img {
 .product-description {
   gap: 1em;
   display: flex;
-  min-width: 24.5em;
+  min-width: 25em;
   flex-direction: column;
   justify-content: flex-end;
 }
