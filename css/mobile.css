@@ -142,7 +142,7 @@
 
   .taste-name {
     left: 50%;
-    top: 560px;
+    top: 60vh;
     width: 90vw;
     z-index: 100;
     min-height: 1em;
